@@ -9,26 +9,26 @@ interface InputPanelProps {
 }
 
 const TONE_OPTIONS: { value: Tone; label: string; icon: string; desc: string }[] = [
-  { value: "technical",     label: "Technical",     icon: "⚙️", desc: "Full API specs & TS types" },
-  { value: "balanced",      label: "Balanced",      icon: "⚖️", desc: "Professional + plain-English" },
+  { value: "technical", label: "Technical", icon: "⚙️", desc: "Full API specs & TS types" },
+  { value: "balanced", label: "Balanced", icon: "⚖️", desc: "Professional + plain-English" },
   { value: "non-technical", label: "Non-Technical", icon: "💬", desc: "Plain English, no jargon" },
 ];
 
 const AUDIENCE_OPTIONS: { value: Audience; label: string; icon: string }[] = [
-  { value: "dev-team", label: "Dev Team",   icon: "👩‍💻" },
-  { value: "founder",  label: "Founder",    icon: "🚀" },
-  { value: "pm",       label: "Product Manager", icon: "📋" },
+  { value: "dev-team", label: "Dev Team", icon: "👩‍💻" },
+  { value: "founder", label: "Founder", icon: "🚀" },
+  { value: "pm", label: "Product Manager", icon: "📋" },
 ];
 
 const EXAMPLE_NOTE = `We need a feature where our AI automatically assigns tasks to the right people on the team. The idea: when a new task gets created, the system looks at everyone's current workload, their skills (tags on their profile), and past performance to suggest who should take it. A team lead can confirm or override the suggestion with one click. Every override should be logged so the AI can learn and improve. Important: if someone is already overloaded, they shouldn't be suggested. This should plug into our existing project management task creation flow.`;
 
 export default function InputPanel({ onGenerate, isLoading }: InputPanelProps) {
-  const [note, setNote]         = useState("");
-  const [tone, setTone]         = useState<Tone>("balanced");
+  const [note, setNote] = useState("");
+  const [tone, setTone] = useState<Tone>("balanced");
   const [audience, setAudience] = useState<Audience>("dev-team");
   const [showSettings, setShowSettings] = useState(false);
 
-  const charCount  = note.length;
+  const charCount = note.length;
   const canGenerate = charCount >= 20 && !isLoading;
 
   return (

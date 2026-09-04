@@ -28,25 +28,26 @@ Translating rough vision into engineering specs typically takes **hours or days 
 
 ## ✨ Features
 
-- **🎙️ Raw Transcription Ingestion:** Paste audio transcripts from Otter.ai, Whisper, Apple Voice Memos, or rough bullet points.
-- **⚡ 1-Click Voice Note Sample:** Includes a pre-built realistic marketplace voice note demo for immediate testing.
+- **🎙️ Raw Transcription Ingestion:** Paste audio transcripts from Otter.ai, Whisper, Apple Voice Memos, or rough bullet points with real-time token estimation.
+- **⚡ Curated Architecture Presets:** 1-click loading for AST-based PR triage, metered Stripe billing, or a high-throughput Rust vector engine.
 - **🎛️ Context & Audience Tuning:**
-  - **Audience:** *Solo Dev / AI Coder* (lean & code-focused), *Agency / Freelancers* (milestones & contracts), or *Seed Pitch* (product-led).
+  - **Audience:** *Solo Dev / AI Coder* (lean & code-focused), *Agency / Freelancers* (milestones & contracts), or *Seed Pitch* (product-led & moats).
   - **Tone & Depth:** *Technical & Lean* vs. *Comprehensive & Enterprise-Ready*.
+- **⚡ 7-Stage DAG Compilation Pipeline:** Real-time multi-stage graph visualization showing transcript normalization, entity extraction, invariant parsing, DDL synthesis, and NFR compilation with streaming hardware telemetry (tok/sec, latency, memory).
 - **🏛️ 5-Pillar Spec Architecture:**
-  1. **Executive Scope & Problem:** Core problem statement, proposed solution, and explicit out-of-scope boundaries.
-  2. **User Stories & Acceptance Criteria:** Formatted in industry-standard Gherkin syntax (`Given / When / Then`).
-  3. **REST API & Schema Specifications:** Concrete HTTP methods (`GET`, `POST`, `PATCH`), endpoints, JSON payload structures, and response codes.
-  4. **Frontend Component Hierarchy:** React/Next.js component trees, parent-child mappings, and local/global state management requirements.
-  5. **Edge Cases & Non-Functional Requirements:** Rate limiting, auth failure handling, latency budgets, and security considerations.
+  1. **Executive Scope & Quantitative Target Bento:** Problem statement, SLA metric cards, and explicit In-Scope vs Out-of-Scope boundaries.
+  2. **Gherkin User Stories & Interactive QA Matrix:** Formatted in industry-standard Gherkin syntax (`Given / When / Then`) with reactive test verification checkboxes.
+  3. **REST API, TypeScript & PostgreSQL DDL:** Typed HTTP endpoints, syntax-highlighted `schema.ts`, and production-ready `CREATE TABLE` and `CREATE INDEX` migration scripts.
+  4. **Frontend Component Hierarchy & Live Sandbox:** ASCII component trees paired with interactive, functional React mock widgets (`Authorize Check` button with state transitions).
+  5. **Edge Cases, SLAs & Sign-Off Ledger:** Rate limiting, binary diff bypass, dead-letter queues, and a tamper-evident cryptographic sign-off SHA.
 - **🔄 Dual-Engine Architecture (Zero-Key Demo + Claude Live):**
   - **Demo Mode (Zero-Config):** Works out of the box with zero environment variables or API keys. Uses realistic deterministic generation with simulated streaming delay.
-  - **Live Mode:** Seamlessly connects to `claude-3-5-sonnet-20241022` whenever an `ANTHROPIC_API_KEY` is provided.
+  - **Live Mode:** Seamlessly connects to `claude-3-7-sonnet` whenever an `ANTHROPIC_API_KEY` is provided.
 - **📋 Developer-First Export:**
   - **Copy Markdown:** Copy individual sections or the entire PRD to clipboard.
-  - **Download `.md`:** Instant export of a structured `.md` file ready to drop into **Cursor**, **Claude Code**, **Linear**, or **Notion**.
-  - **Web Share:** Share specs with collaborators via native device share or direct links.
-- **🎨 Glassmorphic Dark-Mode UI:** Dual violet/sky atmospheric glow, custom typography via Inter, micro-animations, and responsive layout constraints.
+  - **Export for Cursor / Claude Code:** Instantly formats specs as `.cursorrules` or `specs/feature.md` system prompts.
+  - **Download `.md`:** Instant export of structured `.md` files.
+- **🎨 Obsidian Dark-Mode Studio UI:** Linear/Datadog-grade dark obsidian shell, Geist and Geist Mono typography, Material Symbols iconography, micro-animations, and responsive layout constraints.
 
 ---
 
@@ -54,23 +55,23 @@ Translating rough vision into engineering specs typically takes **hours or days 
 
 ```mermaid
 flowchart TD
-    A[Founder Voice Note / Brain Dump] --> B[Chisel Frontend Interface\nNext.js 16 + Tailwind v4]
-    B --> C{Context Controls\nAudience + Tone}
-    C --> D[POST /api/generate-prd]
+    A[Founder Voice Note / Brain Dump] --> B[Chisel Developer Studio\nNext.js 16 + React 19 + Tailwind v4]
+    B --> C{Context Controls\nAudience + Depth}
+    C --> D[7-Stage DAG Compiler\nToken Emitter + Live Telemetry]
     
     D --> E{API Key Configured?}
     
-    E -- Yes --> F[Claude 3.5 Sonnet Engine\nPrompt Architecture + JSON Schema Enforcement]
+    E -- Yes --> F[Claude 3.7 Sonnet Engine\nPrompt Architecture + JSON Schema Enforcement]
     E -- No --> G[Deterministic Demo Engine\nRealistic Spec Fallback + Simulation Delay]
     
     F --> H[Schema Validation & Sanitization]
     G --> H
     
-    H --> I[PRD State Machine\n5-Pillar Reactive View]
+    H --> I[PRD State Machine\n5-Pillar Spec Document View]
     
-    I --> J[1-Click Markdown Export]
-    I --> K[AI IDEs: Cursor / Claude Code]
-    I --> L[Engineering Sprint & Task Tracker]
+    I --> J[1-Click Markdown Export & Cursor Sync]
+    I --> K[AI IDEs: Cursor / Claude Code / Windsurf]
+    I --> L[Engineering Sprint & Interactive QA]
 ```
 
 ---
@@ -80,11 +81,12 @@ flowchart TD
 | Domain | Technology | Purpose |
 | :--- | :--- | :--- |
 | **Framework** | [Next.js 16.3.4 (App Router)](https://nextjs.org/) | Serverless API routes, React Server Components, fast edge execution |
-| **UI Library** | [React 19](https://react.dev/) | Client-side reactive state machine and interactive accordions |
-| **Styling** | [Tailwind CSS v4](https://tailwindcss.com/) | Modern `@theme` tokens, glassmorphism, CSS variables, dark palette |
-| **LLM Provider** | [Anthropic Claude 3.5 Sonnet](https://www.anthropic.com/) | High-precision prompt following, systems architecture, and JSON generation |
+| **UI Library** | [React 19](https://react.dev/) | Client-side reactive state machine, interactive sandboxes, and verification checkboxes |
+| **Styling** | [Tailwind CSS v4](https://tailwindcss.com/) | Modern `@theme` tokens, glassmorphic obsidian palette, responsive grid |
+| **LLM Provider** | [Anthropic Claude 3.7 Sonnet](https://www.anthropic.com/) | High-precision prompt following, systems architecture, and JSON generation |
 | **SDK** | `@anthropic-ai/sdk` | Official TypeScript SDK for Anthropic APIs |
-| **Typography** | Inter | Clean, readable engineering font |
+| **Typography** | Geist & Geist Mono | Vercel's high-density developer font family |
+| **Icons** | Material Symbols Outlined | Standardized engineering iconography |
 | **Deployment** | [Vercel](https://vercel.com/) | Instant edge hosting, zero-maintenance CI/CD |
 
 ---
@@ -96,14 +98,19 @@ chisel/
 ├── app/
 │   ├── api/
 │   │   └── generate-prd/
-│   │       └── route.ts          # Serverless route handler (Claude 3.5 Sonnet + Demo mode)
-│   ├── globals.css               # Tailwind v4 theme, gradients, glassmorphism tokens
-│   ├── layout.tsx                # App root layout, SEO metadata, Inter font
-│   └── page.tsx                  # Main application state machine & centered container
+│   │       └── route.ts          # Serverless route handler (Claude 3.7 Sonnet + Demo mode)
+│   ├── globals.css               # Tailwind v4 @theme tokens, obsidian palette, typography
+│   ├── layout.tsx                # App root layout, SEO metadata, Geist & Material Symbols
+│   └── page.tsx                  # Main studio orchestrator (editor -> compiling -> document)
 ├── components/
-│   ├── HeroSection.tsx           # Logo mark, headline, 3-step value proposition
-│   ├── InputPanel.tsx            # Transcript textarea, audience/tone toggles, CTA
-│   └── PRDOutput.tsx             # 5-section color-coded PRD viewer, copy & export tools
+│   ├── Header.tsx                # Fixed studio header with live engine telemetry & status
+│   ├── Sidebar.tsx               # Fixed navigation sidebar with active specs & token meters
+│   ├── IdeaEditor.tsx            # Monospace input canvas, sample pills, audience/depth tuning
+│   ├── CompilingView.tsx         # 7-stage DAG execution graph, token emitter, hardware telemetry
+│   ├── SpecDocumentView.tsx      # 5-pillar technical specification view with interactive sandbox
+│   ├── HeroSection.tsx           # Legacy hero presentation component
+│   ├── InputPanel.tsx            # Legacy input panel component
+│   └── PRDOutput.tsx             # Legacy PRD output component
 ├── lib/
 │   ├── mock-prd.ts               # Standalone fallback PRD for demo mode
 │   └── prompts.ts                # System prompt engineering & JSON schema guidelines

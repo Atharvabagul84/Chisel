@@ -9,11 +9,11 @@ interface PRDOutputProps {
 }
 
 const SECTIONS = {
-  summary:    { icon: "🎯", label: "Summary",            accent: "#8b5cf6" },
-  stories:    { icon: "📋", label: "User Stories",       accent: "#38bdf8" },
-  api:        { icon: "🔌", label: "REST API Spec",      accent: "#34d399" },
-  ui:         { icon: "🎨", label: "UI Components",      accent: "#fb923c" },
-  acceptance: { icon: "✅", label: "Acceptance Criteria",accent: "#e879f9" },
+  summary: { icon: "🎯", label: "Summary", accent: "#8b5cf6" },
+  stories: { icon: "📋", label: "User Stories", accent: "#38bdf8" },
+  api: { icon: "🔌", label: "REST API Spec", accent: "#34d399" },
+  ui: { icon: "🎨", label: "UI Components", accent: "#fb923c" },
+  acceptance: { icon: "✅", label: "Acceptance Criteria", accent: "#e879f9" },
 };
 
 function CopyBtn({ text, id }: { text: string; id: string }) {
@@ -102,14 +102,14 @@ export default function PRDOutput({ prd, isDemo }: PRDOutputProps) {
 
   function downloadMd() {
     const blob = new Blob([allMarkdown], { type: "text/markdown" });
-    const url  = URL.createObjectURL(blob);
-    const a    = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
     a.href = url; a.download = `${prd.title.replace(/\s+/g, "-").toLowerCase()}.md`; a.click();
   }
 
-  const storyCopy      = prd.userStories.map(s => `As ${s.persona}, I want to ${s.goal}, so that ${s.benefit}.`).join("\n");
-  const apiCopy        = prd.apiSpec.map(e => `${e.method} ${e.path} — ${e.description}`).join("\n");
-  const uiCopy         = prd.uiComponents.map(c => `${c.name}: ${c.description}`).join("\n");
+  const storyCopy = prd.userStories.map(s => `As ${s.persona}, I want to ${s.goal}, so that ${s.benefit}.`).join("\n");
+  const apiCopy = prd.apiSpec.map(e => `${e.method} ${e.path} — ${e.description}`).join("\n");
+  const uiCopy = prd.uiComponents.map(c => `${c.name}: ${c.description}`).join("\n");
   const acceptanceCopy = prd.acceptanceCriteria.map(a => `Given ${a.given} | When ${a.when} | Then ${a.then}`).join("\n");
 
   return (
@@ -138,9 +138,9 @@ export default function PRDOutput({ prd, isDemo }: PRDOutputProps) {
         <p className="text-sm leading-relaxed mb-4" style={{ color: "#cbd5e1" }}>{prd.summary}</p>
         <div className="flex gap-2 flex-wrap">
           {[
-            { label: "Tone",     value: prd.metadata.tone },
+            { label: "Tone", value: prd.metadata.tone },
             { label: "Audience", value: prd.metadata.audience },
-            { label: "Effort",   value: prd.metadata.estimatedEffort },
+            { label: "Effort", value: prd.metadata.estimatedEffort },
           ].map((m) => (
             <div key={m.label} className="chip chip-violet">
               <span style={{ opacity: 0.6 }}>{m.label}:</span> {m.value}
@@ -219,7 +219,7 @@ export default function PRDOutput({ prd, isDemo }: PRDOutputProps) {
                     <span
                       key={sc.code}
                       className="text-xs px-2 py-0.5 rounded-md"
-                      style={sc.code < 300 ? {background:"rgba(52,211,153,0.1)",color:"#34d399",border:"1px solid rgba(52,211,153,0.2)"} : sc.code < 400 ? {background:"rgba(251,191,36,0.1)",color:"#fbbf24",border:"1px solid rgba(251,191,36,0.2)"} : {background:"rgba(248,113,113,0.1)",color:"#f87171",border:"1px solid rgba(248,113,113,0.2)"}}
+                      style={sc.code < 300 ? { background: "rgba(52,211,153,0.1)", color: "#34d399", border: "1px solid rgba(52,211,153,0.2)" } : sc.code < 400 ? { background: "rgba(251,191,36,0.1)", color: "#fbbf24", border: "1px solid rgba(251,191,36,0.2)" } : { background: "rgba(248,113,113,0.1)", color: "#f87171", border: "1px solid rgba(248,113,113,0.2)" }}
                     >
                       {sc.code} {sc.description}
                     </span>
@@ -265,7 +265,7 @@ export default function PRDOutput({ prd, isDemo }: PRDOutputProps) {
                 {ac.id}
               </span>
               <div className="space-y-1.5 text-sm">
-                {[{lbl:"Given",val:ac.given},{lbl:"When",val:ac.when},{lbl:"Then",val:ac.then}].map((r)=>(
+                {[{ lbl: "Given", val: ac.given }, { lbl: "When", val: ac.when }, { lbl: "Then", val: ac.then }].map((r) => (
                   <div key={r.lbl} className="flex gap-2">
                     <span className="shrink-0 font-semibold w-10" style={{ color: "#64748b" }}>{r.lbl}</span>
                     <span style={{ color: "#cbd5e1" }}>{r.val}</span>

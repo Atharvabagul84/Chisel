@@ -86,7 +86,7 @@ export default function HeroSection() {
                   left: "calc(50% + 22px)",
                   right: "calc(-50% + 22px)",
                   height: "1px",
-                  background: `linear-gradient(90deg, ${step.accent}80, ${STEPS[i+1].accent}50)`,
+                  background: `linear-gradient(90deg, ${step.accent}80, ${STEPS[i + 1].accent}50)`,
                 }}
               />
             )}
