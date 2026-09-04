@@ -124,8 +124,8 @@ chisel/
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/atharva-bagul/chisel.git
-cd chisel
+git clone https://github.com/Atharvabagul84/Chisel.git
+cd Chisel
 ```
 
 ### 2. Install Dependencies
@@ -183,11 +183,6 @@ The core intelligence behind Chisel is encapsulated in [`lib/prompts.ts`](lib/pr
 
 ---
 
-## 👨‍💻 Author
- 
- **Atharva Bagul**
- - Co-Founder, ANTIMATRIX
- - [GitHub](https://github.com/atharva-bagul) • [LinkedIn](https://www.linkedin.com/in/atharva-bagul) • [Email](mailto:Bagul.atharva.manoj@gmail.com)
 
 ---
 
