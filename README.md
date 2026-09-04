@@ -1,6 +1,6 @@
 # ⌁ Chisel — Sculpt Rough Ideas into Production-Ready Specs
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-black?style=for-the-badge&logo=vercel)](https://founder-brief-omega.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-black?style=for-the-badge&logo=vercel)](https://chisel-chi.vercel.app)
 [![Next.js 16](https://img.shields.io/badge/Next.js-16.3.4-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![React 19](https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react)](https://react.dev/)
 [![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4.0-38bdf8?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
@@ -9,7 +9,7 @@
 
 > **Chisel** is an AI-powered developer tool that takes messy founder voice notes, audio transcripts, and rapid brain dumps and sculpts them into complete, production-ready Product Requirement Documents (PRDs) — including user stories, REST API specifications, UI component trees, and acceptance criteria.
 
-🔗 **Live Deployment:** [https://chisel-chi.vercel.app/)  
+🔗 **Live Deployment:** [https://chisel-chi.vercel.app](https://chisel-chi.vercel.app)  
 📖 **Architecture & Interview Guide:** [`docs/INTERVIEW_PITCH_AND_ARCHITECTURE.md`](docs/INTERVIEW_PITCH_AND_ARCHITECTURE.md)
 
 ---

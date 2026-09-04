@@ -75,7 +75,7 @@ export default function Header({ isDemo = true, onNewSpec }: HeaderProps) {
           </div>
           <div className="w-px h-4 bg-outline-variant hidden sm:block" />
           <a
-            href="https://founder-brief-omega.vercel.app"
+            href="https://chisel-chi.vercel.app"
             target="_blank"
             rel="noopener noreferrer"
             className="p-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded transition-colors flex items-center justify-center"

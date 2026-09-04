@@ -2,7 +2,7 @@
 ### Complete Interview Pitch, Strategic Rationale, Feature Intentionality & Screen-Share Playbook
 **Author:** Atharva Bagul  
 **Stack:** Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, Anthropic Claude 3.7 Sonnet, Geist & Material Symbols  
-**Live Application:** [https://founder-brief-omega.vercel.app](https://founder-brief-omega.vercel.app)  
+**Live Application:** [https://chisel-chi.vercel.app](https://chisel-chi.vercel.app)  
 **GitHub Repository:** [https://github.com/Atharvabagul84/Chisel](https://github.com/Atharvabagul84/Chisel)  
 
 ---
@@ -30,7 +30,7 @@ Your portfolio is structured around two complementary flagship projects that sys
 
 ### Pitch B: The 60-Second "Dogfooding & AI Engineering" Pitch (Best for Andy / AI Specialist Questions)
 > *"For me, AI tools like Cursor and Claude Code aren't just autocomplete—they're high-velocity development engines that demand structured context. If you feed an AI agent vague prompts, you get hallucinations and refactor loops. You need deterministic specifications.*  
-> *While preparing for this role and exploring modern AI developer workflows, I built and deployed **Chisel** (`founder-brief-omega.vercel.app`). It acts as an upstream compiler for AI workflows: it takes raw transcripts from Otter, Apple Memos, or Slack, extracts domain entities, and compiles a comprehensive 5-pillar PRD.*  
+> *While preparing for this role and exploring modern AI developer workflows, I built and deployed **Chisel** (`chisel-chi.vercel.app`). It acts as an upstream compiler for AI workflows: it takes raw transcripts from Otter, Apple Memos, or Slack, extracts domain entities, and compiles a comprehensive 5-pillar PRD.*  
 > *It features an interactive 7-stage DAG compilation graph with streaming telemetry, OpenAPI 3.1 contracts with PostgreSQL migration DDL, interactive component sandboxes, and a 1-click 'Export for Cursor' button that creates clean `.cursorrules` and `specs/feature.md` files. I built it to demonstrate both high-velocity vibe-coding and strict production engineering."*
 
 ---
@@ -200,7 +200,7 @@ When the interviewer says: *"Can you show me what you built?"* follow this exact
 
 ```
 [0:00 - 0:10] STEP 1: OPEN APPLICATION
-• Share screen showing https://founder-brief-omega.vercel.app (or localhost:3000)
+• Share screen showing https://chisel-chi.vercel.app (or localhost:3000)
 • SAY: "Here is Chisel. The premise is simple: founders have rapid ideas, but engineers need 
         deterministic constraints. The interface is built with Next.js 16, React 19, and Tailwind v4, 
         styled with Geist and Material Symbols."
