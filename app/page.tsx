@@ -6,6 +6,9 @@ import Sidebar from "@/components/Sidebar";
 import IdeaEditor from "@/components/IdeaEditor";
 import CompilingView from "@/components/CompilingView";
 import SpecDocumentView from "@/components/SpecDocumentView";
+import PromptChainsModal from "@/components/PromptChainsModal";
+import EngineConfigModal from "@/components/EngineConfigModal";
+import AuditLogsModal from "@/components/AuditLogsModal";
 import { PRD, Tone, Audience } from "@/types/prd";
 import { MOCK_PRD } from "@/lib/mock-prd";
 
@@ -18,10 +21,47 @@ export default function Home() {
   const [currentTone, setCurrentTone] = useState<Tone>("technical");
   const [currentAudience, setCurrentAudience] = useState<Audience>("dev-team");
 
+  // Modal dialog states for sidebar buttons
+  const [isPromptChainOpen, setIsPromptChainOpen] = useState(false);
+  const [isEngineConfigOpen, setIsEngineConfigOpen] = useState(false);
+  const [isAuditLogsOpen, setIsAuditLogsOpen] = useState(false);
+
   // Load default initial PRD for instant exploration if user clicks Active Specs
   useEffect(() => {
     setPRD(MOCK_PRD);
   }, []);
+
+  function handleNavigateToSchema() {
+    if (view !== "document") {
+      setView("document");
+    }
+    setTimeout(() => {
+      const el = document.getElementById("schema-models");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        el.classList.add("ring-2", "ring-primary", "ring-offset-2", "ring-offset-background");
+        setTimeout(() => {
+          el.classList.remove("ring-2", "ring-primary", "ring-offset-2", "ring-offset-background");
+        }, 2000);
+      }
+    }, 120);
+  }
+
+  function handleNavigateToAPIContracts() {
+    if (view !== "document") {
+      setView("document");
+    }
+    setTimeout(() => {
+      const el = document.getElementById("api-contracts");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        el.classList.add("ring-2", "ring-tertiary", "ring-offset-2", "ring-offset-background");
+        setTimeout(() => {
+          el.classList.remove("ring-2", "ring-tertiary", "ring-offset-2", "ring-offset-background");
+        }, 2000);
+      }
+    }, 120);
+  }
 
   async function handleGenerate(note: string, tone: Tone, audience: Audience) {
     setCurrentTone(tone);
@@ -102,6 +142,11 @@ export default function Home() {
         onSelectView={(targetView) => setView(targetView)}
         hasDocument={!!prd}
         tokenCount={428}
+        onNavigateToSchema={handleNavigateToSchema}
+        onNavigateToAPIContracts={handleNavigateToAPIContracts}
+        onOpenPromptChain={() => setIsPromptChainOpen(true)}
+        onOpenEngineConfig={() => setIsEngineConfigOpen(true)}
+        onOpenAuditLogs={() => setIsAuditLogsOpen(true)}
       />
 
       {/* Main Content Area */}
@@ -131,6 +176,20 @@ export default function Home() {
           )}
         </main>
       </div>
+
+      {/* Interactive Modals for Sidebar Navigation */}
+      <PromptChainsModal
+        isOpen={isPromptChainOpen}
+        onClose={() => setIsPromptChainOpen(false)}
+      />
+      <EngineConfigModal
+        isOpen={isEngineConfigOpen}
+        onClose={() => setIsEngineConfigOpen(false)}
+      />
+      <AuditLogsModal
+        isOpen={isAuditLogsOpen}
+        onClose={() => setIsAuditLogsOpen(false)}
+      />
     </div>
   );
 }

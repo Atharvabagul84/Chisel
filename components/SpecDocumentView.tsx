@@ -505,9 +505,15 @@ export default function SpecDocumentView({ prd, onRefine }: SpecDocumentViewProp
               </h2>
             </div>
 
-            <div className="bg-surface-container rounded-lg p-5 shadow-sm flex flex-col gap-4 border border-outline-variant">
-              <div className="text-xs font-mono uppercase text-secondary font-semibold">
-                Core Engine Endpoints
+            <div id="api-contracts" className="bg-surface-container rounded-lg p-5 shadow-sm flex flex-col gap-4 border border-outline-variant scroll-mt-20">
+              <div className="flex items-center justify-between">
+                <div className="text-xs font-mono uppercase text-secondary font-semibold flex items-center gap-1.5">
+                  <span className="material-symbols-outlined text-sm text-tertiary">code_blocks</span>
+                  <span>Core Engine Endpoints (API Contracts)</span>
+                </div>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-surface-container-highest text-secondary">
+                  OpenAPI 3.1
+                </span>
               </div>
               <div className="flex flex-col gap-2 font-mono text-xs">
                 {prd.apiSpec.map((ep: APIEndpoint, idx: number) => (
@@ -535,11 +541,12 @@ export default function SpecDocumentView({ prd, onRefine }: SpecDocumentViewProp
               </div>
 
               {/* Code / Schema Spec Block */}
-              <div className="mt-4 flex flex-col gap-2">
+              <div id="schema-models" className="mt-4 flex flex-col gap-2 scroll-mt-20">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono uppercase text-secondary font-semibold">
-                    TypeScript Contract &amp; DB Representation
-                  </span>
+                  <div className="text-xs font-mono uppercase text-secondary font-semibold flex items-center gap-1.5">
+                    <span className="material-symbols-outlined text-sm text-primary">schema</span>
+                    <span>TypeScript Contract &amp; Schema Models</span>
+                  </div>
                   <span className="text-[11px] font-mono text-primary">schema.ts</span>
                 </div>
                 <div className="bg-surface-container-lowest p-4 rounded-lg font-mono text-xs overflow-x-auto text-on-surface leading-relaxed border border-outline-variant/40">
