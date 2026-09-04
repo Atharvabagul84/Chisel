@@ -9,7 +9,7 @@
 
 > **Chisel** is an AI-powered developer tool that takes messy founder voice notes, audio transcripts, and rapid brain dumps and sculpts them into complete, production-ready Product Requirement Documents (PRDs) — including user stories, REST API specifications, UI component trees, and acceptance criteria.
 
-🔗 **Live Deployment:** [https://founder-brief-omega.vercel.app](https://founder-brief-omega.vercel.app)  
+🔗 **Live Deployment:** [https://chisel-chi.vercel.app/)  
 📖 **Architecture & Interview Guide:** [`docs/INTERVIEW_PITCH_AND_ARCHITECTURE.md`](docs/INTERVIEW_PITCH_AND_ARCHITECTURE.md)
 
 ---
