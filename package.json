@@ -1,6 +1,6 @@
 {
   "name": "chisel-ai",
-  "version": "1.0.0",
+  "version": "2.4.0",
   "description": "AI-powered tool that sculpts rough founder voice notes and brain dumps into production-ready PRDs",
   "author": "Atharva Bagul",
   "private": true,

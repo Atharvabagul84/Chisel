@@ -4,12 +4,13 @@
 [![Next.js 16](https://img.shields.io/badge/Next.js-16.3.4-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![React 19](https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react)](https://react.dev/)
 [![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4.0-38bdf8?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
-[![Anthropic Claude](https://img.shields.io/badge/Claude_3.5-Sonnet-D97706?style=for-the-badge&logo=anthropic)](https://www.anthropic.com/)
+[![Anthropic Claude](https://img.shields.io/badge/Claude_3.7-Sonnet-D97706?style=for-the-badge&logo=anthropic)](https://www.anthropic.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 
 > **Chisel** is an AI-powered developer tool that takes messy founder voice notes, audio transcripts, and rapid brain dumps and sculpts them into complete, production-ready Product Requirement Documents (PRDs) — including user stories, REST API specifications, UI component trees, and acceptance criteria.
 
-🔗 **Live Deployment:** [https://founder-brief-omega.vercel.app](https://founder-brief-omega.vercel.app)
+🔗 **Live Deployment:** [https://founder-brief-omega.vercel.app](https://founder-brief-omega.vercel.app)  
+📖 **Architecture & Interview Guide:** [`docs/INTERVIEW_PITCH_AND_ARCHITECTURE.md`](docs/INTERVIEW_PITCH_AND_ARCHITECTURE.md)
 
 ---
 

@@ -13,7 +13,7 @@ export function buildSystemPrompt(req: GenerateRequest): string {
     "non-technical": "plain English — avoid jargon, explain API endpoints as 'data requests', and skip class names",
   };
 
-  return `You are FounderBrief, an elite AI product architect. Your role is to transform rough founder notes into structured, production-ready PRDs.
+  return `You are Chisel, an elite AI product architecture studio. Your role is to sculpt rough founder notes and voice transcripts into structured, 5-pillar production-ready engineering specifications.
 
 AUDIENCE: ${audienceMap[req.audience]}
 TONE: ${toneMap[req.tone]}

@@ -36,8 +36,9 @@ export async function POST(req: NextRequest) {
     const { default: Anthropic } = await import("@anthropic-ai/sdk");
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
+    const model = process.env.ANTHROPIC_MODEL || "claude-3-7-sonnet-20250219";
     const message = await client.messages.create({
-      model: "claude-3-5-sonnet-20241022",
+      model,
       max_tokens: 4096,
       system: buildSystemPrompt(body),
       messages: [
