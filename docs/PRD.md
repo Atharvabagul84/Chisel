@@ -19,7 +19,6 @@ Drafted 2026-10-27 from the README, docs/reference/status.md and the code. Appro
 - Product managers at small product teams (primary)
 - Engineers reviewing scope and acceptance criteria before building
 - Founders acting as their own PM
-- Portfolio reviewers and hiring managers evaluating the project (secondary, for the hosted demo)
 
 ## 05 Core Features (Version 1)
 - **Draft:** send a 30–12,000 character brief to the AI, open a labelled worked example, or write manually.
