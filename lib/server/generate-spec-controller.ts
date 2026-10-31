@@ -3,6 +3,9 @@ import { generateFeatureSpec, GenerationError, type CompleteFeatureSpec } from "
 import { assertSameOrigin, RequestInputError, type OriginConfig } from "./auth-request";
 import { providerKeyName, type GenerationConfig } from "./generation-config";
 import { LimiterUnavailableError, VISITOR_DAILY_LIMIT, visitorId, type GenerationLimiter } from "./generation-rate-limit";
+import { estimateCostUsd, type TokenUsage } from "./generation-cost";
+import type { LogFields, RequestLog } from "./request-log";
+import { featureSpecPromptVersion } from "./feature-spec-prompt";
 
 const MAX_REQUEST_BYTES = 64 * 1024;
 const json = (body: unknown, status = 200, headers: Record<string, string> = {}) => Response.json(body, {
@@ -41,35 +44,43 @@ const readRequestBody = async (request: Request): Promise<unknown> => {
 
 const resetTime = (reset: number) => new Date(reset).toISOString().slice(11, 16);
 
+const usageFields = (model: string, usage: TokenUsage | undefined): LogFields => usage
+  ? { inputTokens: usage.inputTokens, outputTokens: usage.outputTokens, estimatedCostUsd: estimateCostUsd(model, usage) }
+  : {};
+
 export const createGenerateSpecHandler = (dependencies: {
   config: GenerationConfig;
   complete: CompleteFeatureSpec;
   /** Required for production generation; null keeps the hosted demo closed. */
   limiter?: { limit: GenerationLimiter; salt: string } | null;
   origin?: OriginConfig;
-}) => async (request: Request): Promise<Response> => {
+}) => async (request: Request, log?: RequestLog): Promise<Response> => {
   const { config, limiter } = dependencies;
+  const fail = (code: string, error: string, status: number, headers: Record<string, string> = {}) => {
+    log?.set({ code });
+    return json({ code, error }, status, headers);
+  };
   try {
     const parsed = generateRequestSchema.safeParse(await readRequestBody(request));
     if (!parsed.success) {
-      return json({ code: "invalid_request", error: "Provide only a feature brief of 30 to 12,000 characters." }, 400);
+      return fail("invalid_request", "Provide only a feature brief of 30 to 12,000 characters.", 400);
     }
     if (config.production && !config.hostedDemo) {
-      return json({ code: "generation_unavailable", error: "Live generation is disabled in production until authentication and usage limits are configured. Use the local development workspace." }, 503);
+      return fail("generation_unavailable", "Live generation is disabled in production until authentication and usage limits are configured. Use the local development workspace.", 503);
     }
     if (!config.apiKey) {
-      return json({ code: "generation_unavailable", error: `Live generation needs a ${providerKeyName(config.provider)} in the server environment. You can still open the labeled example.` }, 503);
+      return fail("generation_unavailable", `Live generation needs a ${providerKeyName(config.provider)} in the server environment. You can still open the labeled example.`, 503);
     }
     const headers: Record<string, string> = {};
     if (config.production) {
       if (!limiter) {
-        return json({ code: "generation_unavailable", error: "Demo generation is unavailable until usage limits are configured. You can still write manually or open the labeled example." }, 503);
+        return fail("generation_unavailable", "Demo generation is unavailable until usage limits are configured. You can still write manually or open the labeled example.", 503);
       }
       assertSameOrigin(request, dependencies.origin);
       let result;
       try { result = await limiter.limit(visitorId(request, limiter.salt)); } catch (error) {
         if (error instanceof LimiterUnavailableError) {
-          return json({ code: "generation_unavailable", error: "Demo usage limits can't be checked right now, so generation is paused. Please try again later." }, 503);
+          return fail("generation_unavailable", "Demo usage limits can't be checked right now, so generation is paused. Please try again later.", 503);
         }
         throw error;
       }
@@ -78,18 +89,25 @@ export const createGenerateSpecHandler = (dependencies: {
         const error = result.scope === "visitor"
           ? `You've used today's ${VISITOR_DAILY_LIMIT} demo drafts. Try again after ${resetTime(result.reset)} UTC, or write the spec manually.`
           : `The demo has reached today's shared limit. Try again after ${resetTime(result.reset)} UTC, or write the spec manually.`;
-        return json({ code: "rate_limited", error }, 429, { "Retry-After": retryAfter });
+        log?.set({ rateLimitScope: result.scope });
+        return fail("rate_limited", error, 429, { "Retry-After": retryAfter });
       }
       headers["RateLimit-Remaining"] = String(result.remaining);
     }
-    return json(await generateFeatureSpec(parsed.data.note, {
+    log?.set({ provider: config.provider ?? "anthropic", model: config.model, promptVersion: featureSpecPromptVersion });
+    const { usage, ...generated } = await generateFeatureSpec(parsed.data.note, {
       model: config.model,
       complete: dependencies.complete,
       signal: request.signal,
-    }), 200, headers);
+    });
+    log?.set(usageFields(config.model, usage));
+    return json(generated, 200, headers);
   } catch (error) {
-    if (error instanceof RequestInputError) return json({ code: "invalid_origin", error: error.message }, error.status);
-    if (error instanceof GenerationError) return json({ code: error.code, error: error.message }, error.status);
-    return json({ code: "generation_failed", error: "The request could not be completed. Your brief is preserved; please retry." }, 500);
+    if (error instanceof RequestInputError) return fail("invalid_origin", error.message, error.status);
+    if (error instanceof GenerationError) {
+      log?.set(usageFields(config.model, error.usage));
+      return fail(error.code, error.message, error.status);
+    }
+    return fail("generation_failed", "The request could not be completed. Your brief is preserved; please retry.", 500);
   }
 };

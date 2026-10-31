@@ -46,3 +46,28 @@ jobs:
         run: npm run typecheck
       - name: Build production app
         run: npm run build
+
+  migrations:
+    name: Apply migrations to PostgreSQL 17
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    services:
+      postgres:
+        # The PostgreSQL image RestoreProof's restore drills use; pinned by digest.
+        image: postgres:17.11-bookworm@sha256:858bb5e98eed02eb8cafbcdc007f9a65d1b613972028944a8ec2133ccaf80d27
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s --health-timeout 5s --health-retries 12
+    env:
+      # Throwaway service container, not a hosted Supabase project.
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Apply every migration and check security invariants
+        run: bash scripts/check-migrations.sh

@@ -12,5 +12,6 @@ export const createAnthropicCompletion = (apiKey: string): CompleteFeatureSpec =
   return {
     text: message.content.filter((block) => block.type === "text").map((block) => block.text).join("\n"),
     stopReason: message.stop_reason,
+    usage: { inputTokens: message.usage.input_tokens, outputTokens: message.usage.output_tokens },
   };
 };

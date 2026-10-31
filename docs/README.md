@@ -12,6 +12,9 @@
 - [Project notes](reference/project-notes.md): behaviour, API contract, boundaries, module map
 - [Status](reference/status.md): what is implemented and verified, and what isn't
 
+## Evals
+- [Feature-spec evals](../evals/README.md): eval briefs, checker and live runner
+
 ## Decisions
 - [0001 One bounded, schema-validated LLM call](decisions/0001-bounded-llm-call.md)
 - [0002 Authorization in PostgreSQL row-level security](decisions/0002-rls-authorization.md)

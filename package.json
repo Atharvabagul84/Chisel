@@ -1,6 +1,6 @@
 {
   "name": "chisel-ai",
-  "version": "2.4.0",
+  "version": "1.0.0",
   "description": "Editable feature briefs, scope, and acceptance criteria for product and engineering teams",
   "author": "Atharva Bagul",
   "private": true,
@@ -10,7 +10,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "tsx --test tests/*.test.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "eval:live": "tsx --env-file-if-exists=.env.local evals/run-live.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.123.0",

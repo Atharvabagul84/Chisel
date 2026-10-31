@@ -1,5 +1,4 @@
 @AGENTS.md
-@docs/HANDOFF.md
 @docs/PRD.md
 @docs/ARCHITECTURE.md
 @docs/DESIGN_SYSTEM.md

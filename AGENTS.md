@@ -11,7 +11,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 # Chisel agent rules
 
 ## Before you start
-- Read docs/HANDOFF.md first (local only, never commit it), then docs/README.md (index), docs/PRD.md, docs/ARCHITECTURE.md and docs/DESIGN_SYSTEM.md. Record design changes as an ADR in docs/decisions/
+- If a local docs/HANDOFF.md exists (gitignored, imported through the gitignored CLAUDE.local.md), read it first; then read docs/README.md (index), docs/PRD.md, docs/ARCHITECTURE.md and docs/DESIGN_SYSTEM.md. Record design changes as an ADR in docs/decisions/
 - Read CLAUDE.md for product boundaries; they override convenience
 - Check existing components and `lib/server/` modules before creating new ones
 

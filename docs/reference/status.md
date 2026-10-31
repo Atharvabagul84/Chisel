@@ -8,12 +8,13 @@ Updated 6 October 2026. This records the implementation and observed verificatio
 - Supabase email-code sign-in, owner-managed workspaces, PM/engineer membership, and manually shared invitations tied to a verified email.
 - Durable shared briefs, immutable database snapshots on save, optimistic revision checks, and explicit copying of local drafts into a workspace.
 - Server-verified users, exact-origin mutation checks, database RLS, restricted write RPCs, input limits, and pilot data caps.
+- Operations (2026-10-31): JSON request logs with request IDs, per-request token and cost accounting, a versioned prompt, a 6-brief eval set, and a CI job that applies every migration to PostgreSQL 17 and checks schema security invariants.
 
 Personal criterion checkboxes record a reader's clarity review. They are cleared on shared saves and do not establish formal approval or executed tests. Formal PM/engineering decisions, a revision comparison/history interface, source-linked requirements, and issue-tracker integrations remain future work.
 
 ## Verification recorded
 
-For this repository update on 6 October 2026, all 73 automated tests passed, including 17 PostgreSQL tests using PGlite. Lint, TypeScript checking, and the production build also passed. Run the commands in [README](../../README.md) when validating a new checkout. PGlite exercises the actual migration SQL with a minimal test auth schema; it does not replace hosted Auth, email delivery, or browser collaboration checks.
+For this repository update on 6 October 2026, all 73 automated tests passed, including 17 PostgreSQL tests using PGlite. Lint, TypeScript checking, and the production build also passed. On 31 October 2026, 101 tests passed locally (Node 24), and `scripts/check-migrations.sh` applied both migrations and passed the invariant check against a local `postgres:17.11-bookworm` container; the invariant check also failed as expected on a table without RLS, a direct write grant and a public `security definer` function. The live eval (`npm run eval:live`) has not been run yet, so no model pass rate is recorded. Run the commands in [README](../../README.md) when validating a new checkout. PGlite exercises the actual migration SQL with a minimal test auth schema; it does not replace hosted Auth, email delivery, or browser collaboration checks.
 
 Against the connected pilot, the following were observed:
 

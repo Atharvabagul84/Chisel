@@ -20,8 +20,10 @@ Recorded 2026-10-27 from the code. Detail on modules: docs/reference/project-not
 | Database | Supabase Postgres, migrations in `supabase/migrations/` |
 | Auth | Supabase Auth email codes via `@supabase/ssr` 0.12.7; `getUser()` on every protected request |
 | Email | Custom SMTP required for Supabase Free (provider not chosen; Resend recommended) |
-| Tests | `node:test` via tsx, PGlite 0.5 for real SQL policy tests (86 tests) |
-| CI | GitHub Actions `.github/workflows/ci.yml`, Node 22 + 24 |
+| Tests | `node:test` via tsx, PGlite 0.5 for real SQL policy tests (101 tests) |
+| Logging | One JSON line per API request (`lib/server/request-log.ts`): request ID (also `X-Request-Id`), route, status, latency; generation adds provider, model, prompt version, tokens, estimated cost. No briefs, drafts, emails or IPs |
+| LLM evals | `evals/`: 6 briefs with expected spec properties; checker tested in `npm test`, live scoring with `npm run eval:live` (local only) |
+| CI | GitHub Actions `.github/workflows/ci.yml`: test, lint, typecheck, build on Node 22 + 24; migrations applied to PostgreSQL 17 plus `supabase/checks/schema-invariants.sql` |
 | Deployment | Vercel, https://chisel-chi.vercel.app |
 
 ## 03 Project Structure
@@ -36,6 +38,9 @@ chisel/
 │ ├ supabase/          # Supabase client setup
 │ └ team/              # Team contracts
 ├ supabase/migrations/ # Workspaces, members, invitations, briefs, immutable versions
+├ supabase/checks/     # Schema security invariants, run by CI after the migrations
+├ evals/               # Feature-spec eval briefs, checker, live runner
+├ scripts/             # check-migrations.sh (CI)
 ├ tests/               # Unit, route, provider-failure and PGlite SQL tests
 ├ proxy.ts             # Session refresh (Next 16 proxy, formerly middleware)
 └ docs/                # PRD, architecture, design system; guides/, reference/, decisions/
@@ -46,7 +51,8 @@ chisel/
 2. Controller checks content type, 64 KiB cap and the Zod request schema, then the production gate and key presence. In the hosted demo it also checks the origin and the Upstash limits (salted IP hash; fails closed if Upstash errors or times out) and returns `RateLimit-Remaining`, or 429 `rate_limited` with `Retry-After`
 3. Service calls the provider adapter with a 45-second deadline and the caller's abort signal
 4. Response must finish cleanly (`end_turn`), parse as JSON and pass `featureSpecSchema`, otherwise a visible `invalid_output` error
-5. Browser shows the editable spec; drafts save to localStorage; team saves go through RPCs that reject stale revisions
+5. The route wrapper writes one JSON log line (status, latency, error code, tokens, cost, prompt version)
+6. Browser shows the editable spec; drafts save to localStorage; team saves go through RPCs that reject stale revisions
 
 ## 05 Scalability
 - Stay a single Next.js monolith; no orchestration or microservices
