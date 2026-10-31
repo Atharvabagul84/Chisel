@@ -46,6 +46,8 @@ order by tablename;
 
 Expect five rows and `rowsecurity = true`: `chisel_workspaces`, `chisel_members`, `chisel_briefs`, `chisel_brief_versions`, and `chisel_invitations`. The `public` schema must remain available through the Data API. The migration supplies explicit grants together with access policies. [Supabase API security](https://supabase.com/docs/guides/api/securing-your-api).
 
+For the full check, also run `supabase/checks/schema-invariants.sql` in SQL Editor. It only reads catalog tables and raises an error naming the first problem: a public table without row-level security, a direct table write grant to `anon` or `authenticated`, a `security definer` function in `public` or one without an empty `search_path`, or `anon` access to the private schema or Chisel functions. CI runs the same check on every pull request after applying all migrations, in filename order, to an empty PostgreSQL 17 database (`scripts/check-migrations.sh`), so a migration that fails to apply or weakens these rules is caught before it reaches a project. CI never connects to a hosted Supabase project.
+
 If SQL reports an error, stop and save that message. Do not rerun arbitrary fragments or delete tables. If you later adopt the Supabase CLI, reconcile this manual application with migration history before using `db push`.
 
 ## 3 Configure email delivery and codes
