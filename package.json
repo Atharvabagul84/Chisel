@@ -10,7 +10,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "tsx --test tests/*.test.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "eval:live": "tsx --env-file-if-exists=.env.local evals/run-live.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.123.0",
