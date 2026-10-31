@@ -17,7 +17,7 @@ test("returns the generated spec without mock or legacy response fields", async 
   assert.equal(response.status, 200);
   const body = await response.json();
   assert.deepEqual(body.spec, sampleFeatureSpec);
-  assert.deepEqual(Object.keys(body).sort(), ["generatedAt", "model", "spec"]);
+  assert.deepEqual(Object.keys(body).sort(), ["generatedAt", "model", "promptVersion", "spec"]);
   assert.match(response.headers.get("cache-control") ?? "", /no-store/);
 });
 

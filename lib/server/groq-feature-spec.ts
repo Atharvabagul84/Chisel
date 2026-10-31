@@ -9,6 +9,7 @@ const groqResponseSchema = z.object({
     message: z.object({ content: z.string().nullable().optional() }),
     finish_reason: z.string().nullable(),
   })).min(1),
+  usage: z.object({ prompt_tokens: z.number().int().nonnegative(), completion_tokens: z.number().int().nonnegative() }).optional(),
 });
 
 export class ProviderHttpError extends Error {
@@ -32,10 +33,12 @@ export const createGroqCompletion = (apiKey: string, fetchImpl: typeof fetch = f
   });
   // Status only: provider error bodies can echo the request and never reach logs or users.
   if (!response.ok) throw new ProviderHttpError(response.status);
-  const choice = groqResponseSchema.parse(await response.json()).choices[0];
+  const body = groqResponseSchema.parse(await response.json());
+  const choice = body.choices[0];
   return {
     text: choice.message.content ?? "",
     // Map OpenAI-style "stop" onto the service's clean-finish check; "length" stays truncated.
     stopReason: choice.finish_reason === "stop" ? "end_turn" : choice.finish_reason,
+    usage: body.usage && { inputTokens: body.usage.prompt_tokens, outputTokens: body.usage.completion_tokens },
   };
 };

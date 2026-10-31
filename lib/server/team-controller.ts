@@ -35,7 +35,7 @@ export const createTeamHandler = (action: TeamAction, factory: (() => Promise<Te
     if (code === "22023") return privateJson({ error: action === "accept" ? "This invitation cannot be accepted. Use the invited email and check that the link is unused, active, and less than seven days old." : "Check the request fields and try again." }, 400);
     if (code === "PGRST116") return privateJson({ error: "This workspace is unavailable or you are no longer a member." }, 404);
     // Deliberately exclude upstream messages, draft content and invite tokens.
-    console.error("team_request_failed", { action, code: typeof code === "string" ? code : "unknown" });
+    console.error(JSON.stringify({ level: "error", event: "team_request_failed", action, code: typeof code === "string" ? code : "unknown" }));
     return privateJson({ error: "The workspace could not complete this request. Please try again." }, 502);
   }
 };
