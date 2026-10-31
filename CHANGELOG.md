@@ -4,6 +4,15 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+### Added
+- One JSON log line per API request with a request ID (`X-Request-Id`), status and latency; generation also logs provider, model, prompt version, token counts and an estimated cost.
+- Versioned system prompt: `promptVersion` in generation responses, pinned to the prompt text by a test.
+- Eval set of 6 briefs with expected spec properties, a tested checker and `npm run eval:live`.
+- CI job that applies every migration to PostgreSQL 17 and checks schema security invariants.
+
+### Changed
+- README leads with the security design; `package.json` version aligned with v1.0.0.
+
 ## [1.0.0] - 2026-10-28
 
 First public release. Earlier development history is kept in a private archive.

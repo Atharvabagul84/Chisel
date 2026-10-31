@@ -68,7 +68,7 @@ Live provider quality has not been evaluated in the implementation environment; 
 
 Database tests use PGlite, an actual PostgreSQL engine with a minimal test auth schema. They verify SQL permissions and transactions; they do not simulate the hosted Supabase Auth/email service. Tokens, notes, and provider errors are excluded from application failure logs.
 
-The API accepts `POST /api/generate-prd` with `{ "note": "30 to 12000 characters" }` and returns `{ spec, model, generatedAt }`. Errors return `{ code, error }`. Bodies are capped at 64 KiB; generation has a 45-second deadline. The previous `prd/tone/audience` contract is no longer used by the active workflow.
+The API accepts `POST /api/generate-prd` with `{ "note": "30 to 12000 characters" }` and returns `{ spec, model, promptVersion, generatedAt }`, where `promptVersion` identifies the system prompt (`featureSpecPromptVersion` in `lib/server/feature-spec-prompt.ts`). Errors return `{ code, error }`. Every API response carries an `X-Request-Id` header that matches its JSON log line. Bodies are capped at 64 KiB; generation has a 45-second deadline. The previous `prd/tone/audience` contract is no longer used by the active workflow.
 
 
 ## Next milestone
