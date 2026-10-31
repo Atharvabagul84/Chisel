@@ -51,3 +51,6 @@ next-env.d.ts
 
 # Local session notes: never committed
 docs/HANDOFF.md
+
+# Local Claude Code memory (imports the local-only handoff)
+CLAUDE.local.md
